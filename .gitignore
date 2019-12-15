@@ -22,7 +22,12 @@
 local_settings.py
 db.sqlite3
 **/**.sqlite3
+
 # media
+*.mp3
+*.wav
+!sample_audio_upload.mp3
+!sample_audio_upload_wav.wav
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
