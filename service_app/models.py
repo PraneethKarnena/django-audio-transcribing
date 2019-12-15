@@ -3,7 +3,7 @@ from django.db import models
 
 class AudioDataModel(models.Model):
     uploaded_file = models.FileField(null=False, blank=False)
-    exported_file = models.FileField(null=True, blank=True)
+    exported_file_name = models.TextField(null=True, blank=True)
 
     transcript = models.TextField(null=True, blank=True)
 
