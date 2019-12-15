@@ -6,7 +6,6 @@ as the main Processing method is called from Home.
 """
 
 from uuid import uuid4
-from datetime import datetime
 
 import speech_recognition
 from pydub import AudioSegment
