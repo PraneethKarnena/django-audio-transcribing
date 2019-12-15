@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    {% if show_timer %}<meta http-equiv="refresh" content="10">{% endif %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,12 +12,92 @@
 </head>
 
 <body>
-<div class="row mt-3">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6 text-center">
-        <h1>Transcribe Audio</h1>
+
+    <div class="row mt-3">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 text-center">
+            <h1>Transcribe Audio</h1>
+        </div>
     </div>
-</div>
+
+    <div class="row mt-3">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h3>Upload Audio:</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input name="uploaded_file" type="file" placeholder="Upload audio file" required>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    {% if samples %}
+    <div class="row mt-3">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h3>Uploaded Audio Samples:</h3>
+            <table class="table mt-3">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Uploaded File</th>
+                        <th scope="col">Transcript</th>
+                        <th scope="col">Time Taken</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sample in samples %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>
+                            <audio src="{{ sample.uploaded_file.url }}" controls></audio>
+                        </td>
+                        <td>{{ sample.transcript }}</td>
+                        <td>{{ sample.time_taken }}</td>
+                        <td>
+                            {% if sample.status == 'PEN' %}
+                            <button type="button" class="btn btn-warning">PENDING</button>
+                            {% endif %}
+                            {% if sample.status == 'ERR' %}
+                            <button type="button" class="btn btn-danger">ERROR</button>
+                            {% endif %}
+                            {% if sample.status == 'COM' %}
+                            <button type="button" class="btn btn-success">SUCCESS</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if show_timer %}
+    <div class="row mt-3">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-4">
+            <h4>Refreshes in <span id="timer"></span></h4>
+        </div>
+    </div>
+    <br>
+    <script>
+        var maxTime = 10;
+        setInterval(func, 1000);
+        function func() {
+            if (maxTime > 0) {
+                document.getElementById('timer').innerHTML = maxTime + " seconds.";
+                maxTime = maxTime - 1;
+            }
+            else { document.getElementById('timer').innerHTML = "Refreshing..." }
+        }
+    </script>
+    {% endif %}
+    {% endif %}
+
+
+
 </body>
 
 </html>
