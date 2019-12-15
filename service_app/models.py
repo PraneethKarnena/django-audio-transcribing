@@ -17,6 +17,8 @@ class AudioDataModel(models.Model):
     )
     status = models.CharField(max_length=3, choices=STATUS_CHOICES, null=False, blank=False, default='PEN')
 
+    time_taken = models.DurationField(null=True, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True, null=False, blank=False)
     updated_at = models.DateTimeField(auto_now=True, null=False, blank=False)
 
