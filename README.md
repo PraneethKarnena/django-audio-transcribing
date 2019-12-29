@@ -24,4 +24,4 @@
  
  <a href="http://www.youtube.com/watch?feature=player_embedded&v=prKaJqRp16U
 " target="_blank"><img src="http://img.youtube.com/vi/prKaJqRp16U/0.jpg" 
-alt="Django Google Speech Recognition" width="240" height="180" border="10" /></a>
+alt="Django Google Speech Recognition" width="600" height="400" border="10" /></a>
