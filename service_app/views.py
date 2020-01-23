@@ -5,15 +5,9 @@ Any Exception raised will be caught in the Home view -
 as the main Processing method is called from Home.
 """
 
-# from uuid import uuid4
-
-# import speech_recognition
-# from pydub import AudioSegment
-
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
-# from django.utils import timezone
 
 from service_app import models
 from service_app import tasks
